@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 320px;
+  background-color: #1C2321;
+  color: #F2F7F2;
+}
+
+.container {
+  padding: 20px;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 20px 0;
+  color: #F2F7F2;
+  text-align: center;
+}
+
+.content {
+  background-color: #444948;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.action-btn {
+  width: 100%;
+  padding: 12px 18px;
+  background-color: #3D4A63;
+  color: #F2F7F2;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.action-btn:hover {
+  background-color: #4d5a73;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.25);
+}
+
+.action-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 3px rgba(0,0,0,0.15);
+}
+
+.action-btn:disabled {
+  background-color: #566175;
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.icon {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.separator {
+  height: 1px;
+  background-color: rgba(242, 247, 242, 0.15);
+  margin: 20px 0;
+}
+
+.instructions {
+  font-size: 13px;
+  color: rgba(242, 247, 242, 0.8);
+  line-height: 1.5;
+  padding: 0 5px;
+}
+
+.footer {
+  margin-top: 20px;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.version {
+  font-size: 11px;
+  color: rgba(242, 247, 242, 0.5);
+  margin: 0;
+}
+
+/* Status indicators for feedback */
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-active {
+  background-color: #4CAF50;
+  box-shadow: 0 0 8px #4CAF50;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+/* Add this to your styles.css file */
+.repo-link {
+  color: rgba(242, 247, 242, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.repo-link:hover {
+  color: rgba(242, 247, 242, 0.8);
+  text-decoration: underline;
+}
