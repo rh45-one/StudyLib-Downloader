@@ -40,7 +40,7 @@ A tool that helps you download documents from StudyLib websites for educational 
 
 ### Usage
 ```bash
-./scraper.sh <StudyLib-URL>
+./StudyLib-Downloader-Bash.sh <StudyLib-URL>
 ```
 
 ## How It Works (Manual Process)
@@ -73,6 +73,7 @@ StudyLib documents are displayed in embedded document viewers. The actual docume
    - In the document viewer, look for the "Download" button (usually in the top-right corner)
    - Click it to start the download
    - The document will download in its original format (usually PDF)
+   - If the download button is hidden, run the following command in the developer tools console to emulate a button press: `document.getElementById("download").click();` 
 
 ### What the Tools Automate
 
