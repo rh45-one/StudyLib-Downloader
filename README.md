@@ -2,8 +2,6 @@
 
 A tool that helps you download documents from StudyLib websites for educational purposes only. Available as a browser extension, Tampermonkey script, and a bash script. Please respect copyright laws and the terms of service of StudyLib.
 
-![StudyLib Downloader](./images/popup-screenshot.png)
-
 ## Browser Extension
 
 ### Installation
@@ -47,8 +45,6 @@ A tool that helps you download documents from StudyLib websites for educational 
 3. Click the button to begin the document detection process
 4. A new tab will open with the document viewer
 5. In the document viewer, click the "Download Document" button that appears in the top-right corner
-
-![Tampermonkey Script Button](./images/tampermonkey-button-screenshot.png)
 
 ## Bash Script Version
 
