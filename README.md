@@ -2,6 +2,13 @@
 
 A tool that helps you download documents from StudyLib websites for educational purposes only. Available as a browser extension, Tampermonkey script, and a bash script. Please respect copyright laws and the terms of service of StudyLib.
 
+## ⚠️ NOTICE
+StudyLib has patched my method on studylib.**ES** - it will still work on studylib.**NET**.  
+I will soon release a new working version, since they just made the download process easier.  
+
+Follow this repository to be notified when a new version is released.  
+Thank you for your patience.
+
 ## Browser Extension
 
 ### Installation
