@@ -48,7 +48,7 @@ Thank you for your patience.
 ### Usage
 
 1. Navigate to any StudyLib document page
-2. A "Download Document" button will automatically appear in the top-right corner (screenshot below)
+2. A "Download Document" button will automatically appear in the top-right corner
 3. Click the button to begin the document detection process
 4. A new tab will open with the document viewer
 5. In the document viewer, click the "Download Document" button that appears in the top-right corner
