@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         StudyLib Downloader
 // @namespace    https://github.com/rh45-one/StudyLib-Downloader
-// @version      1.0.0
+// @version      1.0.1
 // @description  Download documents from StudyLib easily
 // @author       rh45-one
 // @match        https://*.studylib.net/*
