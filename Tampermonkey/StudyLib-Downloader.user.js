@@ -91,6 +91,7 @@
      * 2. Search for #document pattern in HTML
      * 3. Look in script tags
      * 4. Scan JS variables
+     * 5. Search for studylib.es preconnect link (direct PDF download)
      */
     function findAndProcessDocumentUrl() {
         showStatusOverlay("Searching for document...");
@@ -140,6 +141,18 @@
             // Silently catch errors - some properties might not be accessible
         }
         
+        // Method 5: Search for studylib.es preconnect link
+        // On studylib.es, the PDF URL is stored in a preconnect link tag
+        const links = document.querySelectorAll('link[rel="preconnect"]');
+        for (const link of links) {
+            const href = link.getAttribute('href');
+            if (href && href.includes('studylib.es') && href.includes('.pdf')) {
+                // Direct download URL for studylib.es - bypass the viewer and download directly
+                downloadDirectPdf(href);
+                return;
+            }
+        }
+        
         // No document URL found after trying all methods
         updateStatusOverlay("No document URL found. Try refreshing the page.", "error");
         setTimeout(removeStatusOverlay, 3000);
@@ -177,6 +190,34 @@
         
         // Remove the status overlay after a delay
         setTimeout(removeStatusOverlay, 5000);
+    }
+    
+    /**
+     * Directly download a PDF file (used for studylib.es direct PDF links)
+     * This bypasses the viewer and downloads the PDF directly
+     * 
+     * @param {string} url - The direct PDF URL to download
+     */
+    function downloadDirectPdf(url) {
+        updateStatusOverlay(`PDF found! Starting download...`, "success");
+        
+        // Create an anchor element to trigger the download
+        const link = document.createElement('a');
+        link.href = url;
+        
+        // Extract filename from URL if available, otherwise use a default name
+        const urlParts = url.split('/');
+        const filename = urlParts[urlParts.length - 1].split('?')[0] || 'studylib-document.pdf';
+        link.download = filename;
+        
+        // Trigger the download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Provide feedback
+        updateStatusOverlay("Download initiated! Check your downloads folder.", "success");
+        setTimeout(removeStatusOverlay, 3000);
     }
     
     /**
@@ -349,8 +390,12 @@
     } 
     // If we're on a regular StudyLib document page (but not the viewer itself)
     else if (window.location.href.includes('studylib') && 
-             (document.title.includes('Document') || document.title.includes('PDF'))) {
+             (window.location.href.includes('/doc/') || 
+              window.location.href.includes('/document/') ||
+              window.location.pathname.match(/\/\d+$/))) {
         // Add the initial download button that will search for and open the document
+        // Works on all StudyLib variants including .es, .net, .com, .fr
+        // Only shows on actual document pages (e.g., /doc/*, /document/*, or numeric IDs)
         setTimeout(addDownloadButton, 1500);
     }
 })();
