@@ -55,6 +55,17 @@ Thank you for your patience.
 
 ## Bash Script Version
 
+⚠️ **DEPRECATED** - This version is no longer recommended for use. Please use the Browser Extension or Tampermonkey Script instead.
+
+### Why it's deprecated
+- Requires installation of Node.js and npm (additional dependencies)
+- More complex setup process
+- Browser-based solutions are more reliable and user-friendly
+- Maintenance burden for multiple platforms
+
+<details>
+<summary><strong>Requirements, Installation & Usage (Click to expand)</strong></summary>
+
 ### Requirements
 - Bash shell
 - Node.js (v14+)
@@ -68,6 +79,8 @@ Thank you for your patience.
 ```bash
 ./StudyLib-Downloader-Bash.sh <StudyLib-URL>
 ```
+
+</details>
 
 ## How It Works (Manual Process)
 
@@ -101,9 +114,25 @@ StudyLib documents are displayed in embedded document viewers. The actual docume
    - The document will download in its original format (usually PDF)
    - If the download button is hidden, run the following command in the developer tools console to emulate a button press: `document.getElementById("download").click();` 
 
+### Regional Differences
+
+Different StudyLib regional sites implement document delivery differently:
+
+**StudyLib.net, .com, .fr:**
+- Documents are embedded in a viewer accessible via `viewer_next/web/study` URLs
+- Requires navigating to the viewer and clicking the download button
+- The tools detect the viewer URL and automate this process
+
+**StudyLib.es:**
+- Implements direct PDF downloads with session-specific tokens
+- The PDF URL is stored in a `<link rel="preconnect" href="...">` tag in the page source
+- Example: `https://s2p.studylib.es/store/data/008276655.pdf?k=AwAAAZwyqMXKAAACWIoEQpaDsCYfnRGT8cXO8qcUsn4k`
+- The session key parameter (after `?k=`) changes for each access
+- The tools detect these direct URLs and download them directly without needing the viewer
+
 ### What the Tools Automate
 
-The extension and bash script automate this process by:
+The extension and Tampermonkey script automate this process by:
 1. Scanning the page for the document viewer URL using multiple detection methods
 2. Navigating to the document viewer URL
 3. Simulating a click on the download button

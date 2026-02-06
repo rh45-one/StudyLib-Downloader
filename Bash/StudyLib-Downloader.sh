@@ -1,5 +1,7 @@
 #!/bin/bash
-
+#
+# VERSION 1.0.1 
+#
 # =======================================================================
 # StudyLib Document Downloader
 # =======================================================================
@@ -17,6 +19,41 @@
 if [ $# -eq 0 ]; then
     echo "Usage: $0 <URL>"
     echo "Example: $0 https://studylib.net/doc/12345678"
+    exit 1
+fi
+
+# Check if Node.js and npm are installed
+if ! command -v node &> /dev/null; then
+    echo "Error: Node.js is not installed."
+    echo ""
+    echo "This script requires Node.js (v14+) and npm to run."
+    echo ""
+    echo "Please install Node.js using one of these commands:"
+    echo ""
+    echo "  For Ubuntu/Debian:"
+    echo "    sudo apt update && sudo apt install -y nodejs npm"
+    echo ""
+    echo "  For macOS:"
+    echo "    brew install node"
+    echo ""
+    echo "  For other systems, visit: https://nodejs.org/"
+    exit 1
+fi
+
+if ! command -v npm &> /dev/null; then
+    echo "Error: npm is not installed."
+    echo ""
+    echo "This script requires Node.js (v14+) and npm to run."
+    echo ""
+    echo "Please install npm using one of these commands:"
+    echo ""
+    echo "  For Ubuntu/Debian:"
+    echo "    sudo apt update && sudo apt install -y npm"
+    echo ""
+    echo "  For macOS:"
+    echo "    brew install npm"
+    echo ""
+    echo "  For other systems, visit: https://www.npmjs.com/"
     exit 1
 fi
 
@@ -128,6 +165,27 @@ async function scrape() {
     }
     
     // ===== DETECTION METHOD 3 =====
+    // Search for direct PDF link on studylib.es
+    // On studylib.es, the PDF URL is stored in a preconnect link tag
+    console.log("Searching for studylib.es direct PDF link...");
+    const directPdfUrl = await page.evaluate(() => {
+      const links = document.querySelectorAll('link[rel="preconnect"]');
+      for (const link of links) {
+        const href = link.getAttribute('href');
+        if (href && href.includes('studylib.es') && href.includes('.pdf')) {
+          return href;
+        }
+      }
+      return null;
+    });
+    
+    if (directPdfUrl) {
+      console.log("Found direct PDF URL for studylib.es:");
+      console.log(directPdfUrl);
+      documentUrl = directPdfUrl;
+    }
+    
+    // ===== DETECTION METHOD 4 =====
     // If we still don't have a URL, monitor network requests
     // This can catch document URLs that are loaded via AJAX or other means
     if (!documentUrl) {
@@ -154,38 +212,54 @@ async function scrape() {
       }
     }
     
-    // If we found a document URL, navigate to it and download
+    // If we found a document URL, process it based on type
     if (documentUrl) {
-      console.log("\nSuccess! Navigating to document URL to download...");
-      
-      // Navigate to the document viewer
-      await page.goto(documentUrl, { waitUntil: 'networkidle0', timeout: 90000 });
-      
-      // Wait for the viewer to fully load
-      // The download button might not be immediately available
-      await page.waitForTimeout(3000);
-      
-      // Find and click the download button
-      console.log("Looking for download button...");
-      const downloadResult = await page.evaluate(() => {
-        const downloadBtn = document.getElementById("download");
-        if (downloadBtn) {
-          // Found it! Click to start download
-          downloadBtn.click();
-          return "Download button clicked successfully";
-        } else {
-          return "Download button not found - the page layout might have changed";
-        }
-      });
-      
-      console.log(downloadResult);
-      
-      // Wait for download to initialize
-      // This gives the browser time to process the download request
-      await page.waitForTimeout(5000);
-      
-      console.log("Download initiated. Please check your downloads folder.");
-      console.log("Note: On Linux, downloads might go to ~/Downloads or your home directory.");
+      // Check if this is a direct PDF download (studylib.es)
+      if (documentUrl.includes('studylib.es') && documentUrl.includes('.pdf')) {
+        console.log("\nDirect PDF download detected for studylib.es!");
+        console.log("Initiating download...");
+        
+        // Trigger download by navigating to the PDF URL
+        await page.goto(documentUrl, { waitUntil: 'networkidle0', timeout: 90000 });
+        
+        // Wait for download to initialize
+        await page.waitForTimeout(5000);
+        
+        console.log("Download initiated. Please check your downloads folder.");
+        console.log("Note: On Linux, downloads might go to ~/Downloads or your home directory.");
+      } else {
+        // Standard workflow: navigate to viewer and click download button
+        console.log("\nSuccess! Navigating to document URL to download...");
+        
+        // Navigate to the document viewer
+        await page.goto(documentUrl, { waitUntil: 'networkidle0', timeout: 90000 });
+        
+        // Wait for the viewer to fully load
+        // The download button might not be immediately available
+        await page.waitForTimeout(3000);
+        
+        // Find and click the download button
+        console.log("Looking for download button...");
+        const downloadResult = await page.evaluate(() => {
+          const downloadBtn = document.getElementById("download");
+          if (downloadBtn) {
+            // Found it! Click to start download
+            downloadBtn.click();
+            return "Download button clicked successfully";
+          } else {
+            return "Download button not found - the page layout might have changed";
+          }
+        });
+        
+        console.log(downloadResult);
+        
+        // Wait for download to initialize
+        // This gives the browser time to process the download request
+        await page.waitForTimeout(5000);
+        
+        console.log("Download initiated. Please check your downloads folder.");
+        console.log("Note: On Linux, downloads might go to ~/Downloads or your home directory.");
+      }
     } else {
       // We couldn't find the document URL using any method
       console.log("No document URL found. This could be because:");
