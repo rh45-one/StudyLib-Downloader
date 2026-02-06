@@ -22,6 +22,23 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       return true;
     }
     
+    if (message.action === "downloadDirectPdf") {
+      // Handle direct PDF download for studylib.es
+      const filename = message.pdfUrl.split('/').pop().split('?')[0] || 'studylib-document.pdf';
+      
+      chrome.downloads.download({
+        url: message.pdfUrl,
+        filename: filename,
+        saveAs: false
+      }, (downloadId) => {
+        if (downloadId) {
+          sendResponse({ status: "processing" });
+        }
+      });
+      
+      return true;
+    }
+    
     if (message.action === "analyzeCurrentPage") {
       // Tell the content script to analyze the current page
       chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {

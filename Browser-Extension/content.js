@@ -50,9 +50,37 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       }
     } catch (e) { }
     
+    // Method 5: Search for studylib.es preconnect link
+    // On studylib.es, the PDF URL is stored in a preconnect link tag
+    const links = document.querySelectorAll('link[rel="preconnect"]');
+    for (const link of links) {
+      const href = link.getAttribute('href');
+      if (href && href.includes('studylib.es') && href.includes('.pdf')) {
+        // Direct download for studylib.es
+        downloadDirectPdf(href);
+        return;
+      }
+    }
+    
     // No document URL found
     updateStatusOverlay("No document URL found. Try refreshing the page.", "error");
     setTimeout(removeStatusOverlay, 3000);
+  }
+  
+  // Download a PDF file directly (used for studylib.es)
+  function downloadDirectPdf(url) {
+    updateStatusOverlay(`PDF found! Starting download...`, "success");
+    
+    // Send message to background script to handle download
+    chrome.runtime.sendMessage({
+      action: "downloadDirectPdf",
+      pdfUrl: url
+    }, (response) => {
+      if (response && response.status === "processing") {
+        updateStatusOverlay("Download initiated! Check your downloads folder.", "success");
+        setTimeout(removeStatusOverlay, 3000);
+      }
+    });
   }
   
   // Send document URL to background script
