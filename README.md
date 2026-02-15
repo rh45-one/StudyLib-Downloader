@@ -5,6 +5,27 @@ A tool that helps you download documents from StudyLib websites for educational 
 ## ✅ Update
 The downloader is now fully working on both **studylib.es** and **studylib.net**! Sorry for the delay in getting this fixed.
 
+## Tampermonkey Script (recommended)
+
+### Installation
+
+1. First, install the Tampermonkey browser extension if you don't have it already:
+   - [Install Tampermonkey for Chrome / Brave](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+   - [Install Tampermonkey for Firefox](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
+   - [Install Tampermonkey for Edge](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd)
+
+2. Install the StudyLib Downloader script:
+   - [Click here to install StudyLib Downloader script](https://github.com/rh45-one/StudyLib-Downloader/raw/main/Tampermonkey/StudyLib-Downloader.user.js)
+   - When prompted by Tampermonkey, click "Install"
+
+### Usage
+
+1. Navigate to any StudyLib document page
+2. A "Download Document" button will automatically appear in the top-right corner
+3. Click the button to begin the document detection process
+4. A new tab will open with the document viewer
+5. In the document viewer, click the "Download Document" button that appears in the top-right corner
+
 ## Browser Extension
 
 ### Installation
@@ -27,27 +48,6 @@ The downloader is now fully working on both **studylib.es** and **studylib.net**
 2. Click the StudyLib Downloader icon in your browser toolbar
 3. Click the "Download Document" button
 4. The extension will automatically detect the document and begin the download
-
-## Tampermonkey Script Version
-
-### Installation
-
-1. First, install the Tampermonkey browser extension if you don't have it already:
-   - [Install Tampermonkey for Chrome / Brave](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-   - [Install Tampermonkey for Firefox](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
-   - [Install Tampermonkey for Edge](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd)
-
-2. Install the StudyLib Downloader script:
-   - [Click here to install StudyLib Downloader script](https://github.com/rh45-one/StudyLib-Downloader/raw/main/Tampermonkey/StudyLib-Downloader.user.js)
-   - When prompted by Tampermonkey, click "Install"
-
-### Usage
-
-1. Navigate to any StudyLib document page
-2. A "Download Document" button will automatically appear in the top-right corner
-3. Click the button to begin the document detection process
-4. A new tab will open with the document viewer
-5. In the document viewer, click the "Download Document" button that appears in the top-right corner
 
 ## Bash Script Version
 
