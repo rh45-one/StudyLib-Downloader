@@ -92,6 +92,7 @@
      * 3. Look in script tags
      * 4. Scan JS variables
      * 5. Search for studylib.es preconnect link (direct PDF download)
+     * 6. Search for pdfViewer div with data-src attribute (direct PDF download)
      */
     function findAndProcessDocumentUrl() {
         showStatusOverlay("Searching for document...");
@@ -149,6 +150,23 @@
             if (href && href.includes('studylib.es') && href.includes('.pdf')) {
                 // Direct download URL for studylib.es - bypass the viewer and download directly
                 downloadDirectPdf(href);
+                return;
+            }
+        }
+        
+        // Method 6: Search for pdfViewer div with data-src attribute (Last Resort)
+        // Targeted at pages where the PDF source is stored directly in the viewer div
+        const pdfViewer = document.querySelector('div.pdfViewer#viewer[data-src]');
+        if (pdfViewer) {
+            let pdfUrl = pdfViewer.getAttribute('data-src');
+            if (pdfUrl) {
+                // Fix protocol-relative URLs (e.g., //s2p.studylib.net/...)
+                if (pdfUrl.startsWith('//')) {
+                    pdfUrl = window.location.protocol + pdfUrl;
+                }
+                
+                // Open the document URL in a new tab
+                processDocumentUrl(pdfUrl);
                 return;
             }
         }
