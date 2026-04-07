@@ -3,7 +3,7 @@
 A tool that helps you download documents from StudyLib websites for educational purposes only. Available as a browser extension, Tampermonkey script, and a bash script. Please respect copyright laws and the terms of service of StudyLib.
 
 ## ✅ Update
-The downloader is now fully working on both **studylib.es** and **studylib.net**! Sorry for the delay in getting this fixed.
+**Version 1.0.2:** The downloader is fully working on both **studylib.es** and the new **studylib.net** layout! Sorry for any delays in getting things fixed.
 
 ## Tampermonkey Script (recommended)
 
@@ -89,8 +89,9 @@ StudyLib documents are displayed in embedded document viewers. The actual docume
 1. **Find the document viewer URL**:
    - Open a StudyLib document page
    - Right-click and select "View Page Source" (or press Ctrl+U)
-   - Search (Ctrl+F) for `viewer_next/web/study`
-   - You should find a URL that contains this pattern, often within an iframe or JavaScript code
+   - Depending on the site:
+      - On **studylib.es**, search (Ctrl+F) for `<link rel="preconnect"` that includes `.pdf` to find a direct link, or `viewer_next/web/study` to find the embedded viewer.
+      - On the newer **studylib.net** layout, search for `<div id="viewer" class="pdfViewer">` and look for the `data-src` attribute, which contains the direct PDF link.
    
 2. **Alternative method - using Developer Tools**:
    - Open Developer Tools (F12 or Ctrl+Shift+I)
