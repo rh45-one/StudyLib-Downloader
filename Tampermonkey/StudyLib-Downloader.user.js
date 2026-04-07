@@ -1,13 +1,11 @@
 // ==UserScript==
 // @name         StudyLib Downloader
 // @namespace    https://github.com/rh45-one/StudyLib-Downloader
-// @version      1.0.1
+// @version      1.0.2
 // @description  Download documents from StudyLib easily
 // @author       rh45-one
 // @match        https://*.studylib.net/*
-// @match        https://*.studylib.com/*
 // @match        https://*.studylib.es/*
-// @match        https://*.studylib.fr/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=studylib.net
 // @grant        GM_addStyle
 // @run-at       document-idle
@@ -149,6 +147,17 @@
             if (href && href.includes('studylib.es') && href.includes('.pdf')) {
                 // Direct download URL for studylib.es - bypass the viewer and download directly
                 downloadDirectPdf(href);
+                return;
+            }
+        }
+
+        // Method 6: Search for pdfViewer on studylib.net
+        const viewer = document.getElementById('viewer');
+        if (viewer && viewer.classList.contains('pdfViewer')) {
+            const dataSrc = viewer.getAttribute('data-src');
+            if (dataSrc) {
+                const url = dataSrc.startsWith('//') ? 'https:' + dataSrc : dataSrc;
+                downloadDirectPdf(url);
                 return;
             }
         }

@@ -61,6 +61,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         return;
       }
     }
+
+    // Method 6: Search for pdfViewer on studylib.net
+    const viewer = document.getElementById('viewer');
+    if (viewer && viewer.classList.contains('pdfViewer')) {
+      const dataSrc = viewer.getAttribute('data-src');
+      if (dataSrc) {
+        const url = dataSrc.startsWith('//') ? 'https:' + dataSrc : dataSrc;
+        downloadDirectPdf(url);
+        return;
+      }
+    }
     
     // No document URL found
     updateStatusOverlay("No document URL found. Try refreshing the page.", "error");
