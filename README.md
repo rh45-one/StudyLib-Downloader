@@ -5,6 +5,10 @@ A tool that helps you download documents from StudyLib websites for educational 
 ## ✅ Update
 **Version 1.0.2:** The downloader is fully working on both **studylib.es** and the new **studylib.net** layout! Sorry for any delays in getting things fixed.
 
+> **Current status:** 🟢 Working
+>
+> **Last checked:** 08-08-2026
+
 ## Tampermonkey Script (recommended)
 
 ### Installation
