@@ -1,6 +1,6 @@
 # StudyLib Downloader
 
-A tool that helps you download documents from StudyLib websites for educational purposes only. Available as a browser extension, Tampermonkey script, and a bash script. Please respect copyright laws and the terms of service of StudyLib.
+A tool that helps you download documents from StudyLib websites for educational purposes only. Available as a browser extension and as a Tampermonkey script. Please respect copyright laws and the terms of service of StudyLib.
 
 ## ✅ Update
 **Version 1.0.2:** The downloader is fully working on both **studylib.es** and the new **studylib.net** layout! Sorry for any delays in getting things fixed.
@@ -52,35 +52,6 @@ A tool that helps you download documents from StudyLib websites for educational 
 2. Click the StudyLib Downloader icon in your browser toolbar
 3. Click the "Download Document" button
 4. The extension will automatically detect the document and begin the download
-
-## Bash Script Version
-
-⚠️ **DEPRECATED** - This version is no longer recommended for use. Please use the Browser Extension or Tampermonkey Script instead.
-
-### Why it's deprecated
-- Requires installation of Node.js and npm (additional dependencies)
-- More complex setup process
-- Browser-based solutions are more reliable and user-friendly
-- Maintenance burden for multiple platforms
-
-<details>
-<summary><strong>Requirements, Installation & Usage (Click to expand)</strong></summary>
-
-### Requirements
-- Bash shell
-- Node.js (v14+)
-- npm
-
-### Installation
-1. Download the [latest release](https://github.com/rh45-one/StudyLib-Downloader/releases/latest) and extract the `scraper.sh` script
-2. Make it executable: `chmod +x scraper.sh`
-
-### Usage
-```bash
-./StudyLib-Downloader-Bash.sh <StudyLib-URL>
-```
-
-</details>
 
 ## How It Works (Manual Process)
 
